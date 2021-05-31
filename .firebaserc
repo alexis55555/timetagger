@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "cards-6338f": {
+      "hosting": {
+        "TimeTagger": [
+          "cards-6338f"
+        ]
+      }
+    }
+  }
+}
