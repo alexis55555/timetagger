@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
+import { AuthService } from './services/auth.service';
 import { User } from './models/user';
-import { EventService } from './services/event.service';
 
 @Component({
   selector: 'app-root',
@@ -8,22 +8,23 @@ import { EventService } from './services/event.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'TimeTagger';
-
-  constructor(public eventService: EventService) {
+  title = 'TimeTagger';  
+  constructor(public authService: AuthService) {
+    
   }
 
-  store() {
-    this.eventService.store();
-  }
   login() {
-    this.eventService.googleSignin();
+    this.authService.googleSignin();
+  }
+
+  logout() {
+    this.authService.logout();
   }
 
   public getUser(): User {
-    if (this.eventService.loggedInUser) {
-      return this.eventService.loggedInUser;
+    if (this.authService.loggedInUser) {
+      return this.authService.loggedInUser;
     }
-    return {displayName: "", email: "", photoURL: "", uid: ""}
+    return {displayName: "Login", email: "dummy", photoURL: "dummy", uid: "dummy"}
   }
 }
