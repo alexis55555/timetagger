@@ -23,15 +23,13 @@ export class AuthService {
     // Get the auth state, then fetch the Firestore user document or return null
     this.user$ = this.afAuth.authState.pipe(
      switchMap(user => {
-       console.log(user)
          // Logged in
        if (user) {
          this.loggedInUser = user;
-         console.log(this.loggedInUser)
          const test: AngularFirestoreDocument<Event> = this.firestore.doc('orders/' + this.loggedInUser.uid);
          test.valueChanges().subscribe(o => {
             if (o !== undefined) {
-                console.log(o)
+                // console.log(o)
             }
           });
          //this.router.navigate(['/start']);

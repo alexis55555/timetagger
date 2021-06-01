@@ -13,7 +13,7 @@ import * as firebase from 'firebase/app';
   providedIn: 'root'
 })
 export class EventService {
-
+  event: Event = new Event();
 
   constructor(private firestore: AngularFirestore) {
    
@@ -34,5 +34,15 @@ export class EventService {
             .then(res => {}, err => console.log(err));
   }
 
+  public toggleEvent() {
+    if (this.event.isRunning()) {
+      this.event.stop();
+    }else {
+      this.event.start();
+    }
+  }
 
+  getTime() {
+    return this.event.getTime();
+  }
 }

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Subscription, interval } from 'rxjs';
 import { EventService } from 'src/app/services/event.service';
 
 @Component({
@@ -7,20 +8,27 @@ import { EventService } from 'src/app/services/event.service';
   styleUrls: ['./event.component.css']
 })
 export class EventComponent {
-
+  private subscription: Subscription;
+  time = 0;
+  
   constructor(public eventService: EventService) { 
     this.checkForExistingEvent();
+    this.subscription = interval(1000).subscribe(x => { this.updateTime(); });
   }
 
-  public startEvent() {
-
+  public toggleEvent() {
+    this.eventService.toggleEvent();
   }
 
-  public stopEvent() {
-
+  updateTime() {
+    this.time = this.eventService.getTime();
   }
 
   private checkForExistingEvent() {
 
+  }
+
+  isRunning() {
+    return this.eventService.event.isRunning();
   }
 }
