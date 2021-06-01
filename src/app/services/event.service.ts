@@ -22,7 +22,7 @@ export class EventService {
     this.storage = this.firestore.collection('users').doc(this.loggedInUser.uid)
     
     
-    this.storage.collection("events").doc("currentEvent").valueChanges().subscribe((s:any) => {    
+    this.storage.collection("events").doc("currentEvent").valueChanges().subscribe(s => {    
       this.event = Event.createFromBackend(s)
     })
 
@@ -36,8 +36,7 @@ export class EventService {
   }
 
   getEvents() {
-    return this.storage.collection("events", ref => 
-    ref.orderBy('startDate','desc')).valueChanges();
+    return this.storage.collection("events", ref => ref.orderBy('startDate','desc')).valueChanges();
   }
 
   private async startEvent() {    

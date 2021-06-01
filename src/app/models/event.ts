@@ -23,12 +23,6 @@ export class Event implements IEvent {
         }
     }
 
-    json() {
-        return {startDate: this.startDate,
-                endDate: this.endDate,
-                tags: this.tags}
-    }
-
     start() {
         this.endDate = null;
         this.startDate = new Date();        
