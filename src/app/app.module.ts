@@ -21,7 +21,9 @@ import {MatChipsModule} from '@angular/material/chips';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { TagsComponent } from './components/tags/tags.component';
 import { EventDetailComponent } from './components/event-detail/event-detail.component';
-
+import {MatTableModule} from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -51,7 +53,10 @@ import { EventDetailComponent } from './components/event-detail/event-detail.com
     MatCardModule,
     MatGridListModule,
     MatChipsModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   providers: [],
   bootstrap: [AppComponent]
