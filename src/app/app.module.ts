@@ -20,6 +20,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { TagsComponent } from './components/tags/tags.component';
+import { EventDetailComponent } from './components/event-detail/event-detail.component';
+
 
 @NgModule({
   declarations: [
@@ -27,7 +29,8 @@ import { TagsComponent } from './components/tags/tags.component';
     EventComponent,
     LoginComponent,
     EventHistoryComponent,
-    TagsComponent
+    TagsComponent,
+    EventDetailComponent
   ],
   imports: [
     BrowserModule,

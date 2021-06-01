@@ -1,5 +1,6 @@
+<div (click)="hideEventDetail()" class="event-detail2" *ngIf="this.selectedEvent"></div>
+<app-event-detail class="event-detail" *ngIf="this.selectedEvent" [event]="this.selectedEvent"></app-event-detail>
 <h2>History</h2>
 <mat-list>
-    <mat-list-item *ngFor="let event of this.eventService.events">id: {{event.id}}, time: {{event.getTime()}}, tags: <app-tags [event]="event"></app-tags></mat-list-item>
+    <mat-list-item *ngFor="let event of this.eventService.events" (click)="this.selectEvent(event)">id: {{event.id}}, time: {{event.getTime()}} secs</mat-list-item>
 </mat-list>
-

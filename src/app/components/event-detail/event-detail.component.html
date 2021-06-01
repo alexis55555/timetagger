@@ -1,0 +1,10 @@
+<div class="container center">
+    <mat-grid-list class="event-container" cols="1" rowHeight="4rem">
+        <mat-grid-tile [rowspan]="2">{{this.event.getTime()}}</mat-grid-tile>        
+        <mat-grid-tile [rowspan]="1">Start: {{this.event.startDate}}</mat-grid-tile>
+        <mat-grid-tile [rowspan]="1">End: {{this.event.endDate}}</mat-grid-tile>
+        <mat-grid-tile [rowspan]="4">
+           <app-tags [event]="this.event"></app-tags>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>

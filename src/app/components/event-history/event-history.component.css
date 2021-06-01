@@ -1,0 +1,20 @@
+.event-detail {
+
+    margin: 10px 5% 5% 5%;
+    width: 80%;
+    display: block;
+    position: absolute;
+    z-index: 999;
+    top: 10%;
+    left: 0;
+}
+
+.event-detail2 {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    background-color: rgba(128, 128, 128, 0.144);
+}
