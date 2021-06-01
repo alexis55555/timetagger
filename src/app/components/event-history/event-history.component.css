@@ -37,3 +37,7 @@ table {
     width: 25%;
     text-align: left;
   }
+
+.filter-txt {
+    max-width: 200px;
+}

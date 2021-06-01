@@ -25,7 +25,6 @@ export class EventHistoryComponent {
 
   events: Event[] = [];
   displayedColumns: string[] = ['id', 'tags', 'duration', 'startDate'];
-  
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -33,6 +32,7 @@ export class EventHistoryComponent {
   }
 
   selectEvent(event: Event) {
+    console.log("selected ", event);
     this.selectedEvent = event;
   }
 
