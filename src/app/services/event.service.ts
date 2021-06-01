@@ -76,8 +76,8 @@ export class EventService {
     return this.event.getTime();
   }
 
-  public updateEvent(event: IEvent) {
-    const e: IEvent = {id: event.id, endDate: this.event.endDate, tags: this.event.tags, startDate: this.event.startDate};    
+  public updateEvent(ie: IEvent) {
+    const e: IEvent = {id: ie.id, endDate: ie.endDate, tags: ie.tags, startDate: ie.startDate};    
     this.storage.collection<IEvent>("events")
     .doc(e.id)
     .set(e)
