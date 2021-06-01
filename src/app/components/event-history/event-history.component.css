@@ -18,3 +18,8 @@
     left: 0;
     background-color: rgba(128, 128, 128, 0.144);
 }
+
+.list-item {
+    text-align: center;
+    width: 100%;
+}
