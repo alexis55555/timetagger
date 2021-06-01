@@ -1,15 +1,18 @@
 export class Event implements IEvent {
+    duration: number = 0;
     id: string = "currentEvent";
     startDate: Date = null;
     endDate: Date = null;
     tags: string[] = [];
 
-    static createFromBackend(e: any): Event {        
+    static createFromBackend(e: any): Event {  
+        if (!e) {   return new Event();    }      
         const event = new Event();
         event.id = e.id;
         event.startDate = e.startDate ? e.startDate.toDate() : null;
         event.endDate = e.endDate ? e.endDate.toDate() : null;
         event.tags = e.tags ? e.tags : [];
+        event.duration = event.getTime();
         return event;
     }
 
@@ -49,4 +52,5 @@ export interface IEvent {
     startDate: Date;
     endDate: Date;
     tags: string[];
+    duration: number;
 }

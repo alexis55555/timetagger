@@ -47,16 +47,16 @@ export class EventService {
   }
 
   private updateCurrentEvent() {
-    const e: IEvent = {id: "currentEvent", endDate: this.event.endDate, tags: this.event.tags, startDate: this.event.startDate};    
+    const e: IEvent = {id: "currentEvent", endDate: this.event.endDate, tags: this.event.tags, startDate: this.event.startDate, duration: this.event.getTime()};    
     this.storage.collection("events")
                 .doc(e.id)
                 .set(e)
                 .then(res => {}, err => console.log(err));
   }
 
-  public storeEvent(event: IEvent) {
+  public storeEvent(event: Event) {
     const id = this.firestore.createId();
-    const e = {id: id, endDate: event.endDate, startDate: event.startDate, tags: event.tags};    
+    const e = {id: id, endDate: event.endDate, startDate: event.startDate, tags: event.tags, duration: event.getTime()};    
     this.storage.collection<IEvent>("events")
                 .doc(id)
                 .set(e)
@@ -77,8 +77,13 @@ export class EventService {
     return this.event.getTime();
   }
 
-  public updateEvent(ie: IEvent) {
-    const e: IEvent = {id: ie.id, endDate: ie.endDate, tags: ie.tags, startDate: ie.startDate};    
+  public updateEvent(ie: Event) {
+    const e: IEvent = { id: ie.id,
+                        endDate: ie.endDate,
+                        tags: ie.tags,
+                        startDate: ie.startDate,
+                        duration: ie.getTime()};
+
     this.storage.collection<IEvent>("events")
     .doc(e.id)
     .set(e)

@@ -25,14 +25,14 @@
         <td mat-cell *matCellDef="let row"> {{row.tags.join(', ')}} </td>
       </ng-container>
   
-      <ng-container matColumnDef="time">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Time </th>
-        <td mat-cell *matCellDef="let row"> {{row.getTime()}} </td>
+      <ng-container matColumnDef="duration">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Duration </th>
+        <td mat-cell *matCellDef="let row"> {{row.duration}} </td>
       </ng-container>
   
-      <ng-container matColumnDef="date">
+      <ng-container matColumnDef="startDate">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
-        <td mat-cell *matCellDef="let row"> {{row.startDate.toString()}} </td>
+        <td mat-cell *matCellDef="let row"> {{row.startDate}} </td>
       </ng-container>
   
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
