@@ -13,7 +13,7 @@ export class EventComponent {
   
   constructor(public eventService: EventService) { 
     this.checkForExistingEvent();
-    this.subscription = interval(1000).subscribe(x => { this.updateTime(); });
+    this.subscription = interval(1000).subscribe(x => { this.updateTime(); });    
   }
 
   public toggleEvent() {
@@ -31,4 +31,5 @@ export class EventComponent {
   isRunning() {
     return this.eventService.event.isRunning();
   }
+
 }

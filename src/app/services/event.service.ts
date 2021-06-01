@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-
-import { map } from 'rxjs/operators';
 import { Event, IEvent } from '../models/event';
 import { User } from '../models/user';
 
@@ -14,6 +12,7 @@ export class EventService {
   event: Event = new Event();
   storage: AngularFirestoreDocument;
   loggedInUser: User;
+  events: Event[] = [];
 
   constructor(private firestore: AngularFirestore) {
   }
@@ -23,31 +22,43 @@ export class EventService {
     this.storage = this.firestore.collection('users').doc(this.loggedInUser.uid)
     
     
-    this.storage.collection("events").doc("currentEvent").valueChanges().subscribe((s:any) => {
-      console.log(s);
-      const e = s;
-      this.event.startDate = e.startDate.toDate();
-      this.event.endDate = e.endDate.toDate();
-      this.event.tags = e.tags;
+    this.storage.collection("events").doc("currentEvent").valueChanges().subscribe((s:any) => {    
+      this.event = Event.createFromBackend(s)
+    })
+
+
+    this.getEvents().subscribe(es => {
+      if (es) {     
+        this.events = es.map(e => Event.createFromBackend(e));
+      }
     })
     
   }
 
+  getEvents() {
+    return this.storage.collection("events", ref => 
+    ref.orderBy('startDate','desc')).valueChanges();
+  }
+
   private async startEvent() {    
     this.event.start();
+   this.updateCurrentEvent();
+  }
 
-
-    const e: IEvent = {endDate: this.event.endDate, tags: this.event.tags, startDate: this.event.startDate};
-    await this.storage.collection("events").doc("currentEvent").delete()
-    this.storage.collection("events").doc("currentEvent")
+  private updateCurrentEvent() {
+    const e: IEvent = {id: "currentEvent", endDate: this.event.endDate, tags: this.event.tags, startDate: this.event.startDate};    
+    this.storage.collection("events")
+                .doc(e.id)
                 .set(e)
                 .then(res => {}, err => console.log(err));
   }
 
   public storeEvent(event: IEvent) {
-    const e = {endDate: event.endDate, startDate: event.startDate, tags: event.tags};
+    const id = this.firestore.createId();
+    const e = {id: id, endDate: event.endDate, startDate: event.startDate, tags: event.tags};    
     this.storage.collection<IEvent>("events")
-                .add(e)
+                .doc(id)
+                .set(e)
                 .then(res => {}, err => console.log(err));
   }
 
@@ -55,6 +66,7 @@ export class EventService {
     if (this.event.isRunning()) {
       this.event.stop();
       this.storeEvent(this.event);
+      this.storage.collection("events").doc("currentEvent").delete();
     }else {
       this.startEvent();
     }
@@ -63,4 +75,13 @@ export class EventService {
   getTime() {
     return this.event.getTime();
   }
+
+  public updateEvent(event: IEvent) {
+    const e: IEvent = {id: event.id, endDate: this.event.endDate, tags: this.event.tags, startDate: this.event.startDate};    
+    this.storage.collection<IEvent>("events")
+    .doc(e.id)
+    .set(e)
+    .then(res => {this.updateCurrentEvent();}, err => console.log(err));
+  }
+
 }

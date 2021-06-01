@@ -1,14 +1,15 @@
 export class Event implements IEvent {
+    id: string = "currentEvent";
     startDate: Date = null;
     endDate: Date = null;
     tags: string[] = [];
 
-    static createFromBackend(e: IEvent): Event {
+    static createFromBackend(e: any): Event {        
         const event = new Event();
-        event.startDate = e.startDate;
-        event.endDate = e.endDate;        
-        event.tags = e.tags;
-        console.log(event)
+        event.id = e.id;
+        event.startDate = e.startDate ? e.startDate.toDate() : null;
+        event.endDate = e.endDate ? e.endDate.toDate() : null;
+        event.tags = e.tags ? e.tags : [];
         return event;
     }
 
@@ -18,7 +19,7 @@ export class Event implements IEvent {
 
     public removeTag(at: number) {
         if (at >= 0 && this.tags.length > at) {
-            this.tags = this.tags.splice(at, 1);
+           this.tags.splice(at, 1);
         }
     }
 
@@ -50,6 +51,7 @@ export class Event implements IEvent {
 }
 
 export interface IEvent {
+    id: string;
     startDate: Date;
     endDate: Date;
     tags: string[];

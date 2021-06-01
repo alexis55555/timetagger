@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
+import { Event } from 'src/app/models/event';
+import { EventService } from 'src/app/services/event.service';
 
 @Component({
   selector: 'app-event-history',
   templateUrl: './event-history.component.html',
   styleUrls: ['./event-history.component.css']
 })
-export class EventHistoryComponent implements OnInit {
+export class EventHistoryComponent {
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(public eventService: EventService) {
+    
   }
 
 }

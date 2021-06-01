@@ -17,13 +17,17 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { TagsComponent } from './components/tags/tags.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EventComponent,
     LoginComponent,
-    EventHistoryComponent
+    EventHistoryComponent,
+    TagsComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +46,9 @@ import {MatGridListModule} from '@angular/material/grid-list';
     MatMenuModule,
     MatButtonModule,
     MatCardModule,
-    MatGridListModule
+    MatGridListModule,
+    MatChipsModule,
+    MatFormFieldModule
   ],
   providers: [],
   bootstrap: [AppComponent]
