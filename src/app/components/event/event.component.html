@@ -1,6 +1,6 @@
 <div class="container center">
-    <mat-grid-list class="event-container" cols="1" rowHeight="4rem">
-        <mat-grid-tile [rowspan]="2">{{this.time}}</mat-grid-tile>        
+    <mat-grid-list class="event-container center" cols="1" rowHeight="4rem">
+        <mat-grid-tile [rowspan]="2"><h1>{{this.time}}</h1></mat-grid-tile>        
         <mat-grid-tile [rowspan]="2">
             <button mat-fab color="primary" class="center" (click)="this.toggleEvent()">
                 <mat-icon *ngIf="!this.isRunning()">play_arrow</mat-icon>
