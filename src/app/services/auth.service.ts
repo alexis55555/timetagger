@@ -6,6 +6,7 @@ import { User } from '../models/user';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import * as firebase from 'firebase/app';
+import { EventService } from './event.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class AuthService {
   user$: Observable<User>;
   loggedInUser: User;
 
-  constructor(private firestore: AngularFirestore, private afAuth: AngularFireAuth) { 
+  constructor(private firestore: AngularFirestore, private afAuth: AngularFireAuth, private eventService: EventService) { 
     this.autoLogin();
   }
 
@@ -26,12 +27,8 @@ export class AuthService {
          // Logged in
        if (user) {
          this.loggedInUser = user;
-         const test: AngularFirestoreDocument<Event> = this.firestore.doc('orders/' + this.loggedInUser.uid);
-         test.valueChanges().subscribe(o => {
-            if (o !== undefined) {
-                // console.log(o)
-            }
-          });
+         this.eventService.init(this.loggedInUser);
+
          //this.router.navigate(['/start']);
          return this.firestore.doc<User>(`users/${user.uid}`).valueChanges();
        } else {
@@ -66,6 +63,8 @@ private updateUserData(u) {
     photoURL: u.photoURL
   };
   this.loggedInUser = user;
+  console.log(this.loggedInUser)
+  this.eventService.init(this.loggedInUser);
 
   //this.router.navigate(['/start']);
   return userRef.set(user, { merge: true });

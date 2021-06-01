@@ -1,7 +1,16 @@
-export class Event {
-    startDate?: Date = null;
-    endDate?: Date = null;
+export class Event implements IEvent {
+    startDate: Date = null;
+    endDate: Date = null;
     tags: string[] = [];
+
+    static createFromBackend(e: IEvent): Event {
+        const event = new Event();
+        event.startDate = e.startDate;
+        event.endDate = e.endDate;        
+        event.tags = e.tags;
+        console.log(event)
+        return event;
+    }
 
     public addTag(tag: string) {
         this.tags.push(tag);
@@ -38,4 +47,10 @@ export class Event {
         const sTime = Math.round(this.startDate.getTime() / 1000);        
         return eDate - sTime;
     }
+}
+
+export interface IEvent {
+    startDate: Date;
+    endDate: Date;
+    tags: string[];
 }
