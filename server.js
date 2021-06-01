@@ -6,7 +6,7 @@ const port = process.env.PORT || 3000;
 
 
 
-app.use(express.static(__dirname + '/dist/timetagger'));
+app.use(express.static(__dirname + '/dist/TimeTagger'));
 
 app.get('/*', (req, res) => res.sendFile(path.join(__dirname)));
 
