@@ -1,15 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { EventService } from 'src/app/services/event.service';
 
 @Component({
   selector: 'app-event',
   templateUrl: './event.component.html',
   styleUrls: ['./event.component.css']
 })
-export class EventComponent implements OnInit {
+export class EventComponent {
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(public eventService: EventService) { 
+    this.checkForExistingEvent();
   }
 
+  public startEvent() {
+
+  }
+
+  public stopEvent() {
+
+  }
+
+  private checkForExistingEvent() {
+
+  }
 }
