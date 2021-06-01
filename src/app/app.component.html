@@ -22,11 +22,10 @@
         <h1 class="title">Time Tagger</h1>
 
         <div class="user">
-          <div *ngIf="this.authService.loggedInUser===null">          
-            <a mat-icon-button routerLink="login">
+          <div *ngIf="this.authService.loggedInUser===null">    
               <!--<mat-icon class="mat-18" (click)="this.login()">login</mat-icon>-->            
               <button mat-raised-button color="primary" (click)="this.login()">Login</button>
-            </a>
+            
           </div>
           
           <button mat-icon-button [matMenuTriggerFor]="menu"  *ngIf="this.authService.user$ | async as user">
