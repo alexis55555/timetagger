@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { MatTableDataSource } from '@angular/material/table';
 import { Event, IEvent } from '../models/event';
 import { User } from '../models/user';
 
@@ -13,7 +14,7 @@ export class EventService {
   storage: AngularFirestoreDocument;
   loggedInUser: User;
   events: Event[] = [];
-
+  dataSource: MatTableDataSource<Event> = new MatTableDataSource([]);;
   constructor(private firestore: AngularFirestore) {
   }
 
@@ -30,6 +31,7 @@ export class EventService {
     this.getEvents().subscribe(es => {
       if (es) {     
         this.events = es.map(e => Event.createFromBackend(e));
+        this.dataSource.data = this.events;
       }
     })
     

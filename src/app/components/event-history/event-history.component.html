@@ -1,4 +1,4 @@
-<div (click)="hideEventDetail()" class="event-detail2" *ngIf="this.selectedEvent"></div>
+<!--<div (click)="hideEventDetail()" class="event-detail2" *ngIf="this.selectedEvent"></div>
 <app-event-detail class="event-detail" *ngIf="this.selectedEvent" [event]="this.selectedEvent"></app-event-detail>
 <h2>History</h2>
 <mat-list>
@@ -6,37 +6,33 @@
         <div class="list-item">id: {{event.id}}, time: {{event.getTime()}} secs</div>
     </mat-list-item>
 </mat-list>
-
+-->
 
     <mat-label>Filter</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Search" #input>
   
   
   <div class="mat-elevation-z8">
-    <table mat-table [dataSource]="dataSource" matSort>
+    <table mat-table [dataSource]="this.eventService.dataSource" matSort>
   
-      <!-- ID Column -->
       <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header="id"> ID </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
         <td mat-cell *matCellDef="let row"> {{row.id}} </td>
       </ng-container>
   
-      <!-- Progress Column -->
-      <ng-container matColumnDef="progress">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Progress </th>
-        <td mat-cell *matCellDef="let row"> {{row.progress}}% </td>
+      <ng-container matColumnDef="tags">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Tags </th>
+        <td mat-cell *matCellDef="let row"> {{row.tags.join(', ')}} </td>
       </ng-container>
   
-      <!-- Name Column -->
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-        <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+      <ng-container matColumnDef="time">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Time </th>
+        <td mat-cell *matCellDef="let row"> {{row.getTime()}} </td>
       </ng-container>
   
-      <!-- Fruit Column -->
-      <ng-container matColumnDef="fruit">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Fruit </th>
-        <td mat-cell *matCellDef="let row"> {{row.fruit}} </td>
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+        <td mat-cell *matCellDef="let row"> {{row.startDate.toString()}} </td>
       </ng-container>
   
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

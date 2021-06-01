@@ -36,7 +36,7 @@ export class Event implements IEvent {
         this.endDate = new Date();
     }
 
-    getTime() {
+    getTime(): number {
         if (this.startDate === null) {  return 0; }
         const eDate = Math.round((this.endDate !== null ? this.endDate : new Date()).getTime() / 1000);
         const sTime = Math.round(this.startDate.getTime() / 1000);        
