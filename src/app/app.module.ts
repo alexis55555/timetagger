@@ -25,6 +25,9 @@ import {MatTableModule} from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import {MatInputModule} from '@angular/material/input';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { TodoListComponent } from './components/todo-list/todo-list.component';
+
 
 @NgModule({
   declarations: [
@@ -33,7 +36,8 @@ import {MatInputModule} from '@angular/material/input';
     LoginComponent,
     EventHistoryComponent,
     TagsComponent,
-    EventDetailComponent
+    EventDetailComponent,
+    TodoListComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +63,8 @@ import {MatInputModule} from '@angular/material/input';
     MatFormFieldModule,
     MatPaginatorModule,
     MatSortModule,
-    MatInputModule
+    MatInputModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]

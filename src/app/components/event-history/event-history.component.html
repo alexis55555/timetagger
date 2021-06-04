@@ -8,7 +8,7 @@
 </mat-list>
 -->
 <div (click)="hideEventDetail()" class="event-detail2" *ngIf="this.selectedEvent"></div>
-<app-event-detail class="event-detail" *ngIf="this.selectedEvent" [event]="this.selectedEvent"></app-event-detail>
+<app-event-detail class="event-detail" *ngIf="this.selectedEvent" [event]="this.selectedEvent" (close)="this.closeEventDetail()"></app-event-detail>
 <h2>History</h2>
 
       <mat-form-field class="filter-txt">

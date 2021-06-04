@@ -1,7 +1,10 @@
 <div class="container center">
     <div class="todo-list">
         <mat-list-item *ngFor="let toDo of this.eventService.toDos">
-            <mat-checkbox [checked]="toDo.doneAt" (change)="this.complete(toDo, checkbox.checked)" #checkbox>{{ toDo.desc }}</mat-checkbox>
+            <mat-checkbox [checked]="toDo.doneAt" (change)="this.complete(toDo, checkbox.checked)" #checkbox>{{ toDo.desc }}</mat-checkbox>      
+                <button matSuffix mat-icon-button aria-label="Clear" (click)="this.delete(toDo)" class="delete-btn">
+                    <mat-icon>close</mat-icon>
+                </button>
         </mat-list-item>
 
         <mat-form-field class="todo-txt">
@@ -13,8 +16,11 @@
         </mat-form-field>
 
 
-        <mat-list-item *ngFor="let toDo of this.eventService.doneToDos">
+        <mat-list-item *ngFor="let toDo of this.eventService.doneToDos" class="done-todos">
             <mat-checkbox [checked]="toDo.doneAt" (change)="this.complete(toDo, checkbox.checked)" #checkbox>{{ toDo.desc }}</mat-checkbox>
+            <button matSuffix mat-icon-button aria-label="Clear" (click)="this.delete(toDo)" class="delete-btn">
+                <mat-icon>close</mat-icon>
+            </button>
         </mat-list-item>
     </div>
 </div>

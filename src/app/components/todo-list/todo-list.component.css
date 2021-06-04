@@ -10,3 +10,19 @@ mat-list-item, mat-checkbox  {
     text-align: left;
     margin-left: 5px;
 }
+
+.delete-btn {
+    float: right;
+    margin-right: 5px;
+    font-size: 1px;
+
+}
+.todo-txt {
+    width: 100%;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+mat-icon {
+    font-size: 18px;
+}

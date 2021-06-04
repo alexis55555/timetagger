@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { MatTableDataSource } from '@angular/material/table';
 import { Event, IEvent } from '../models/event';
+import { ToDo } from '../models/todo';
 import { User } from '../models/user';
 
 
@@ -14,7 +15,10 @@ export class EventService {
   storage: AngularFirestoreDocument;
   loggedInUser: User;
   events: Event[] = [];
-  dataSource: MatTableDataSource<Event> = new MatTableDataSource([]);;
+  dataSource: MatTableDataSource<Event> = new MatTableDataSource([]);
+  toDos: ToDo[] = [];
+  doneToDos: ToDo[] = [];
+
   constructor(private firestore: AngularFirestore) {
   }
 
@@ -25,6 +29,13 @@ export class EventService {
     
     this.storage.collection("events").doc("currentEvent").valueChanges().subscribe(s => {    
       this.event = Event.createFromBackend(s)
+    })
+
+
+    this.storage.collection<ToDo>("todos", ref => ref.orderBy('createdAt','desc')).valueChanges().subscribe(s => {    
+      this.toDos = s.filter(t => !t.doneAt);
+      this.doneToDos = s.filter(t => t.doneAt);
+      this.doneToDos.sort((a, b) => (a.doneAt > b.doneAt!) ? -1 : 1)
     })
 
 
@@ -90,4 +101,31 @@ export class EventService {
     .then(res => {this.updateCurrentEvent();}, err => console.log(err));
   }
 
+  public addToDo(toDo: ToDo) {
+    toDo.id = this.firestore.createId();
+    this.toDos.push(toDo);
+    this.storage.collection<ToDo>("todos")
+                .doc(toDo.id)
+                .set(toDo)
+                .then(res => {}, err => console.log(err));
+  }
+
+  public updateToDo(toDo: ToDo) {
+    this.storage.collection<ToDo>("todos")
+                .doc(toDo.id)
+                .set(toDo)
+                .then(res => {}, err => console.log(err));
+  }
+
+  public deleteToDo(toDo) {
+    this.storage.collection<ToDo>("todos")
+                .doc(toDo.id)
+                .delete();
+  }
+
+  public delteEvent(event: Event) {
+    this.storage.collection<ToDo>("events")
+                .doc(event.id)
+                .delete();
+  }
 }

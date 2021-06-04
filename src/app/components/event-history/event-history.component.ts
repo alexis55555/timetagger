@@ -36,7 +36,7 @@ export class EventHistoryComponent {
     this.selectedEvent = event;
   }
 
-  hideEventDetail() {
+  closeEventDetail() {
     this.selectedEvent = null;
   }
 
@@ -54,4 +54,5 @@ export class EventHistoryComponent {
       this.eventService.dataSource.paginator.firstPage();
     }
   }
+
 }

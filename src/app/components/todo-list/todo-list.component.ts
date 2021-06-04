@@ -20,4 +20,8 @@ export class TodoListComponent {
     const toDo: ToDo = {createdAt: new Date(), desc: toDoDesc};
     this.eventService.addToDo(toDo);
   }
+
+  public delete(toDo: ToDo) {
+    this.eventService.deleteToDo(toDo);
+  }
 }
