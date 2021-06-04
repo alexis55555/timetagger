@@ -39,6 +39,11 @@ export class Event implements IEvent {
         this.endDate = new Date();
     }
 
+    getDate() {
+        const date = this.startDate ? this.startDate : new Date();
+        return date.toLocaleString();
+    }
+
     getTime(): string {
         if (this.startDate === null) {  return '00:00:00'; }
         const eDate = Math.round((this.endDate !== null ? this.endDate : new Date()).getTime() / 1000);
