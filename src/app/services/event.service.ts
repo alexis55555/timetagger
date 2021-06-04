@@ -18,6 +18,7 @@ export class EventService {
   dataSource: MatTableDataSource<Event> = new MatTableDataSource([]);
   toDos: ToDo[] = [];
   doneToDos: ToDo[] = [];
+  tags: Set<string> = new Set();
 
   constructor(private firestore: AngularFirestore) {
   }
@@ -28,7 +29,7 @@ export class EventService {
     
     
     this.storage.collection("events").doc("currentEvent").valueChanges().subscribe(s => {    
-      this.event = Event.createFromBackend(s)
+      this.event = Event.createFromBackend(s)      
     })
 
 
@@ -43,6 +44,7 @@ export class EventService {
       if (es) {     
         this.events = es.map(e => Event.createFromBackend(e));
         this.dataSource.data = this.events;
+        this.events.forEach(e => e.tags.forEach(t => this.tags.add(t)));
       }
     })
     

@@ -27,7 +27,8 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatInputModule} from '@angular/material/input';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { TodoListComponent } from './components/todo-list/todo-list.component';
-
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -57,14 +58,16 @@ import { TodoListComponent } from './components/todo-list/todo-list.component';
     MatButtonModule,
     MatCardModule,
     MatGridListModule,
+    FormsModule,
     MatChipsModule,
     MatFormFieldModule,
+    ReactiveFormsModule,
     MatTableModule,
-    MatFormFieldModule,
     MatPaginatorModule,
     MatSortModule,
     MatInputModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatAutocompleteModule
   ],
   providers: [],
   bootstrap: [AppComponent]
