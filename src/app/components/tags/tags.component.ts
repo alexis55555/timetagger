@@ -31,7 +31,6 @@ export class TagsComponent implements OnInit{
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase().trim();
     const tags = Array.from(this.eventService.tags.values());
-    console.log(tags)
     return tags.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
   }
 

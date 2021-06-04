@@ -17,7 +17,7 @@
                 [matChipInputFor]="chipList"
                 (matChipInputTokenEnd)="add($event.value); tagInput.value = '';">
       <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-        <mat-option *ngFor="let option of this.filteredOptions | async" [value]="option">
+        <mat-option *ngFor="let option of this.filteredOptions | async" [value]="option" (click)="this.add(option); tagInput.value = '';">
           {{option}}
         </mat-option>
       </mat-autocomplete>   

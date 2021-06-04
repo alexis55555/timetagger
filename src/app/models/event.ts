@@ -1,5 +1,5 @@
 export class Event implements IEvent {
-    duration: number = 0;
+    duration: string = '00:00:00';
     id: string = "currentEvent";
     startDate: Date = null;
     endDate: Date = null;
@@ -39,11 +39,12 @@ export class Event implements IEvent {
         this.endDate = new Date();
     }
 
-    getTime(): number {
-        if (this.startDate === null) {  return 0; }
+    getTime(): string {
+        if (this.startDate === null) {  return '00:00:00'; }
         const eDate = Math.round((this.endDate !== null ? this.endDate : new Date()).getTime() / 1000);
         const sTime = Math.round(this.startDate.getTime() / 1000);        
-        return eDate - sTime;
+        const seconds = eDate - sTime;
+        return new Date(seconds * 1000).toISOString().substr(11, 8);
     }
 }
 
@@ -52,5 +53,5 @@ export interface IEvent {
     startDate: Date;
     endDate: Date;
     tags: string[];
-    duration: number;
+    duration: string;
 }
