@@ -24,7 +24,7 @@ export class EventHistoryComponent {
   @ViewChild('eventDetail') eventDetail: ElementRef;
 
   events: Event[] = [];
-  displayedColumns: string[] = ['id', 'tags', 'duration', 'startDate'];
+  displayedColumns: string[] = ['tags', 'duration', 'startDate'];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
