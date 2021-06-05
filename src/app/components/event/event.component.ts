@@ -9,7 +9,7 @@ import { EventService } from 'src/app/services/event.service';
 })
 export class EventComponent {
   private subscription: Subscription;
-  time = 0;
+  time = '00:00:00';
   
   constructor(public eventService: EventService) { 
     this.checkForExistingEvent();
