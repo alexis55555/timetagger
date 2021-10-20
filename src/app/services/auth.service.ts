@@ -37,9 +37,8 @@ export class AuthService {
          //kakathis.router.navigate(['/login']);
          return of(null);
        }
-     })
-   );
-}
+    }));
+  }
 
 
 public getUser(uid: string): Observable<User>{
@@ -48,8 +47,9 @@ public getUser(uid: string): Observable<User>{
 
 async googleSignin() {
   const provider = new firebase.default.auth.GoogleAuthProvider()
-  const credential = await this.afAuth.signInWithPopup(provider);  
-  return this.updateUserData(credential.user);
+  this.afAuth.signInWithPopup(provider)
+  .then(credential => { this.updateUserData(credential.user); })
+  .catch(error => console.log(error));
 }
 
 private updateUserData(u) {
@@ -72,6 +72,7 @@ private updateUserData(u) {
 }
 
 async logout() {
+  this.loggedInUser = undefined;
   await this.afAuth.signOut();
   //kakathis.router.navigate(['/login']);
 }

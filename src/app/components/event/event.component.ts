@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Subscription, interval } from 'rxjs';
 import { EventService } from 'src/app/services/event.service';
 

@@ -1,56 +1,54 @@
-
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav">
-    <!--[opened]="(isHandset$ | async) === false"-->
-    <mat-toolbar>Menu</mat-toolbar>
-    <mat-nav-list (click)="drawer.close()">
-      <a mat-list-item routerLink="">TimeTagger</a>
-      <a mat-list-item routerLink="todo">ToDo</a>
-      <a mat-list-item routerLink="statistics">Statistics</a>
-    </mat-nav-list>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <mat-toolbar color="primary">
-      <button
-        type="button"
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        (click)="drawer.toggle()">
+    <mat-sidenav #drawer class="sidenav">
+        <!--[opened]="(isHandset$ | async) === false"-->
+        <mat-toolbar>Menu</mat-toolbar>
+        <mat-nav-list (click)="drawer.close()">
+            <a mat-list-item routerLink="">TimeTagger</a>
+            <a mat-list-item routerLink="todo">ToDo</a>
+            <a mat-list-item routerLink="statistics">Statistics</a>
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <mat-toolbar color="primary">
+            <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
 
-      <div class="navigation-bar">
-        <h1 class="title">Time Tagger</h1>
+            <div class="navigation-bar">
+                <h1 class="title">Time Tagger</h1>
 
-        <div class="user">
-          <div *ngIf="this.authService.loggedInUser===null">    
-              <!--<mat-icon class="mat-18" (click)="this.login()">login</mat-icon>-->            
-              <button mat-raised-button color="primary" (click)="this.login()">Login</button>            
-          </div>
-          
-          <button mat-icon-button [matMenuTriggerFor]="menu"  *ngIf="this.authService.user$ | async as user">
-            <span>{{user.displayName}}</span>
+                <div class="user">
+                    <div *ngIf="this.authService.loggedInUser">
+                        <span>{{this.authService.loggedInUser.displayName}}</span>
+                        <button mat-raised-button color="primary" (click)="this.logout()">logout</button>
+                    </div>
+                    <div *ngIf="!this.authService.loggedInUser">
+                        <!--<mat-icon class="mat-18" (click)="this.login()">login</mat-icon>-->
+                        <button mat-raised-button color="primary" (click)="this.login()">Login</button>
+                    </div>
+
+                    <button mat-icon-button [matMenuTriggerFor]="menu" *ngIf="this.authService.user$ | async as user">
           </button>
-          <mat-menu #menu="matMenu">
-            <button mat-menu-item routerLink="statistics">
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item routerLink="statistics">
               <mat-icon>dialpad</mat-icon>
               <span>Redial</span>
             </button>
-            <button mat-menu-item disabled>
+                        <button mat-menu-item disabled>
               <mat-icon>voicemail</mat-icon>
               <span>Check voice mail</span>
             </button>
-            <button mat-menu-item (click)="this.logout()">
+                        <button mat-menu-item (click)="this.logout()">
               <mat-icon>notifications_off</mat-icon>
               <span>Logout</span>
             </button>
-          </mat-menu>
-        </div>
-      </div>
+                    </mat-menu>
+                </div>
+            </div>
 
-    </mat-toolbar>
-    <!-- Add Content Here -->
-    <router-outlet  (click)="drawer.close()" ></router-outlet>
+        </mat-toolbar>
+        <!-- Add Content Here -->
+        <router-outlet (click)="drawer.close()"></router-outlet>
 
-  </mat-sidenav-content>
+    </mat-sidenav-content>
 </mat-sidenav-container>

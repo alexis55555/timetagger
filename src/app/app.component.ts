@@ -10,9 +10,13 @@ import { User } from './models/user';
 export class AppComponent {
   title = 'TimeTagger';  
   constructor(public authService: AuthService) {
-    
   }
 
+  ngAfterViewInit(): void {
+    console.log("heir")
+    console.log(this.authService.loggedInUser)
+    
+  }
   login() {
     this.authService.googleSignin();
   }
